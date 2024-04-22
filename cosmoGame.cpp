@@ -47,7 +47,7 @@ int main()
 			bullets.push_back(CircleShape());
 			bullets.back().setRadius(5);
 			bullets.back().setOrigin(5, 5);
-			bullets.back().setPosition(player.sprite.getPosition());
+			bullets.back().setPosition(player.sprite.getPosition().x + 50, player.sprite.getPosition().y);
 
 			angles.push_back(atan2(Mouse::getPosition(window).y - player.sprite.getPosition().y, 
 								   Mouse::getPosition(window).x - player.sprite.getPosition().x));
