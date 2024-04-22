@@ -2,6 +2,7 @@
 #include "Obstacles.h"
 
 #include <SFML/Graphics.hpp>
+#include <Math.h>
 
 using namespace sf;
 using namespace std;
@@ -23,6 +24,10 @@ int main()
 	Player player (330, 500, "Image/ship.png");
 	Obstacles obstacles(330, 500, "Image/obstacles.png");
 
+	//Bullets
+	vector<CircleShape> bullets;
+	vector<float> angles;
+
 	Clock clock;
 
 	while (window.isOpen())
@@ -38,6 +43,18 @@ int main()
 				window.close();
 		}
 
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			bullets.push_back(CircleShape());
+			bullets.back().setRadius(5);
+			bullets.back().setOrigin(5, 5);
+			bullets.back().setPosition(player.sprite.getPosition());
+
+			angles.push_back(atan2(Mouse::getPosition(window).y - player.sprite.getPosition().y, 
+								   Mouse::getPosition(window).x - player.sprite.getPosition().x));
+
+			
+		}
+
 		//Фон
 		window.clear();
 		window.draw(gamingBackground);
@@ -45,6 +62,11 @@ int main()
 		//Персонаж 
 		player.playerMove(time);
 		window.draw(player.sprite); //Rendering
+
+		for (int i = 0; i < bullets.size(); i++) {
+			window.draw(bullets[i]);
+			bullets[i].move(0, 5 * sin(angles[i]));
+		}
 
 		obstacles.update(player, window, time);
 

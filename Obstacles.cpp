@@ -8,7 +8,7 @@ void Obstacles::update(Player& player, RenderWindow& window, float time)
             player.y < obstacle.y + 60 &&
             player.y > obstacle.y - 60)
         {
-            window.clear(Color::Black);
+            window.close();
         }
 
         if (obstacle.y < obstacles[obstacles.size() - 1].y + 500)
@@ -21,7 +21,7 @@ void Obstacles::update(Player& player, RenderWindow& window, float time)
 
         for (vector<coordinates>::iterator it = obstacles.begin(); it != obstacles.end(); ++it)
         {
-            if (player.y < obstacle.y - 300)
+            if (player.y < obstacle.y - 320)
             {
                 obstacles.erase(it);
                 break;
