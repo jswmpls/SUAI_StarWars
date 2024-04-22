@@ -2,7 +2,7 @@
 
 void Obstacles::update(Player& player, RenderWindow& window, float time)
 {
-	for (coordinates& obstacle : obstacles) {
+	for (coordinates& obstacle : obstacles) { //Подкорректировать
         if (player.x <= obstacle.x + 60 &&
             player.x >= obstacle.x - 60 &&
             player.y < obstacle.y + 60 &&
