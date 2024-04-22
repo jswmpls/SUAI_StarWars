@@ -1,4 +1,5 @@
 ﻿#include "Player.h"
+#include "Obstacles.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -20,6 +21,7 @@ int main()
 
 	//космический корабль
 	Player player (330, 500, "Image/ship.png");
+	Obstacles obstacles(330, 500, "Image/obstacles.png");
 
 	Clock clock;
 
@@ -43,6 +45,8 @@ int main()
 		//Персонаж 
 		player.playerMove(time);
 		window.draw(player.sprite); //Rendering
+
+		obstacles.update(player, window, time);
 
 		window.display();
 	}
