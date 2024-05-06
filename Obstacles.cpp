@@ -1,21 +1,21 @@
 #include "Obstacles.h"
 
-void Obstacles::update(Player& player, RenderWindow& window, float time)
+void Obstacles::update(Player& player, RenderWindow& window, float time, Score& score)
 {
-	for (coordinates& obstacle : obstacles) { //Подкорректировать
-        if (player.x <= obstacle.x + 60 &&
+	for (coordinates& obstacle : obstacles) { 
+        if (player.x <= obstacle.x + 60 && //Подкорректировать
             player.x >= obstacle.x - 60 &&
             player.y < obstacle.y + 60 &&
             player.y > obstacle.y - 60)
         {
-            window.close();
+            loser = true;
         }
 
         if (obstacle.y < obstacles[obstacles.size() - 1].y + 500)
         {
             coordinates newObstacles;
             newObstacles.x = rand() % windowWidth;
-            newObstacles.y = obstacles[obstacles.size() - 1].y - windowHeight / 3;
+            newObstacles.y = obstacles[obstacles.size() - 1].y - (windowHeight / 3);
             obstacles.push_back(newObstacles);
         }
 
@@ -23,6 +23,7 @@ void Obstacles::update(Player& player, RenderWindow& window, float time)
         {
             if (player.y < obstacle.y - 320)
             {
+                score.updateScore();
                 obstacles.erase(it);
                 break;
             }
